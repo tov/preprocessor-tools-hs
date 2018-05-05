@@ -1,10 +1,9 @@
 module Language.Haskell.Preprocessor.Printer ( dump ) where
 
 import Language.Haskell.Preprocessor.Ast
-import Language.Haskell.Preprocessor.Token
 import Language.Haskell.Preprocessor.Loc
 
-import Control.Monad (foldM)
+import Control.Monad (foldM, foldM_)
 
 dump :: Monad m => (String -> m ()) -> [Ast] -> m ()
 dump write forest = start where
@@ -15,7 +14,7 @@ dump write forest = start where
                   x:_ -> initial (file (loc x))
     write (toDirective here)
     write "\n"
-    foldM sayToken here items
+    foldM_ sayToken here items
     write "\n"
 
   sayToken here item

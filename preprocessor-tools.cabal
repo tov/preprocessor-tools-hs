@@ -43,4 +43,4 @@ Library
     Language.Haskell.Preprocessor.Util
   Other-modules:
     Language.Haskell.Preprocessor.Lexer
-  GHC-options: -Wall
+  GHC-options: -Wall -Wno-name-shadowing

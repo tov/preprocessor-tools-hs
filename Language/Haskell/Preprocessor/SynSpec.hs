@@ -13,18 +13,20 @@ data SynSpec = SynSpec {
                }
   deriving (Eq, Show)
 
+instance Semigroup SynSpec where
+  s1 <> s2 = SynSpec {
+               unboxed   = unboxed s1   || unboxed s2,
+               pragmas   = pragmas s1   || pragmas s2,
+               levelnest = levelnest s1 || levelnest s2,
+               blocks    = blocks s1    ++ blocks s2
+             }
+
 instance Monoid SynSpec where
   mempty          = SynSpec {
                       unboxed   = False,
                       pragmas   = False,
                       levelnest = False,
                       blocks    = []
-                    }
-  s1 `mappend` s2 = SynSpec {
-                      unboxed   = unboxed s1   || unboxed s2,
-                      pragmas   = pragmas s1   || pragmas s2,
-                      levelnest = levelnest s1 || levelnest s2,
-                      blocks    = blocks s1    ++ blocks s2
                     }
 
 data Keyword = I { getKey :: String }

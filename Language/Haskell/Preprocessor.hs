@@ -36,6 +36,17 @@ data Extension = Extension {
                    syntaxerror :: Maybe (E.Error -> IO ())
                  }
 
+instance Semigroup Extension where
+  e1 <> e2 = Extension {
+               keywords    = keywords e1 ++ keywords e2,
+               transformer = transformer e1 <=< transformer e2,
+               synspec     = synspec e1 `mappend` synspec e2,
+               usage       = usage e1       <+ usage e2,
+               syntaxerror = syntaxerror e1 <+ syntaxerror e2
+             }
+    where Just a  <+ _ = Just a
+          Nothing <+ b = b
+
 instance Monoid Extension where
   mempty          = Extension {
                       keywords    = [],
@@ -44,15 +55,6 @@ instance Monoid Extension where
                       usage       = Nothing,
                       syntaxerror = Nothing
                     }
-  e1 `mappend` e2 = Extension {
-                      keywords    = keywords e1 ++ keywords e2,
-                      transformer = transformer e1 <=< transformer e2,
-                      synspec     = synspec e1 `mappend` synspec e2,
-                      usage       = usage e1       <+ usage e2,
-                      syntaxerror = syntaxerror e1 <+ syntaxerror e2
-                    }
-    where Just a  <+ _ = Just a
-          Nothing <+ b = b
 
 base :: Extension
 base  = Extension {

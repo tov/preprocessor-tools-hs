@@ -1,16 +1,16 @@
 Name:           preprocessor-tools
-Version:        1.0.1
+Version:        2.0.0
 Cabal-Version:  >= 1.2.3
 License:        BSD3
 License-File:   LICENSE
 Stability:      experimental
-Author:         Jesse A. Tov <tov@eecs.harvard.edu>
-Maintainer:     tov@eecs.harvard.edu
-Homepage:       http://www.eecs.harvard.edu/~tov/pubs/haskell-session-types/
+Author:         Jesse A. Tov <jesse@eecs.northwestern.edu>
+Maintainer:     jesse@eecs.northwestern.edu
+Homepage:       https://github.com/tov/preprocessor-tools-hs
 Category:       Source-tools, Language, Code Generation
 Synopsis:       A framework for extending Haskell's syntax via quick-and-dirty preprocessors
 Build-type:     Simple
-Tested-with:    GHC == 7.4.1
+Tested-with:    GHC == 8.4.2
 Description:
         This library provides a quick-and-dirty (but often effective)
         method for extending Haskell's syntax using a custom
